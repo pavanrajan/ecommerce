@@ -1,0 +1,58 @@
+body {
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+.my_row{
+    padding:17px;
+}
+.my_row .mx_auto{
+    color:black;
+}
+.my_bottom_margin{
+    margin-bottom:15px;
+}
+.card-body h4{
+font-size:15px;
+letter-spacing:.2em
+text-transform:uppercase;
+text:center;
+}
+.my_prod_name{
+    font-size:15px;
+    letter-spacing:.2em;
+    text:center;
+
+}
+.button{
+background-color: white;
+  color: black;
+  border: 2px solid #4CAF50;
+  padding: 10px 24px;
+  font-size: 16px;
+  border-radius: 12px;
+  background-color: #555555;
+}
+.cart_table {
+text-align: center;
+font-size:14 px;
+}
+.cart_table_head{
+
+}
+.my_button {
+    display: left;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  border: 3px solid green;
+
+}

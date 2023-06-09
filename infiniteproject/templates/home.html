@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+        {% if category %}
+                {{category.description |truncatewords:50}}
+        {% else %}
+                purchase infinitely  ... more than your expectations...
+        {% endif %}
+{% endblock %}
+{% block tittle %}
+        {% if category %}
+                {{category.name}}
+        {% else %}
+                Home
+        {% endif %}
+{% endblock %}
+{% block body %}
+<div class="container">
+        <div class="row">
+                <div class="">
+                        <img src="{% static 'images/banner.jpeg' %}" alt="our products" width="50%" height="200">|<img src="{% static 'images/banner2.jpeg' %}" alt="our products" width="49%" height="200">
+                </div>
+        </div>
+</div>
+<div>
+    <br>
+    <br>
+{% if category %}
+        <div>
+                <div>
+                <p><a href="{% url 'infiniteapp:AllProductCat' %}"></a></p>
+                </div>
+        </div>
+{% endif %}
+</div>
+{% if category %}
+<div>
+    <br>
+    <div>
+        <h3>{{ category.name }}</h3>
+    </div>
+    <br>
+    <div>
+        <div>
+            <img src="{{category.image.url}}" alt="{{category.name}}" height="300" width="200">
+        </div>
+    </div>
+    <div>
+        <p>{{ category.description}}</p>
+    </div>
+{% else %}
+    <h4 style="#" class="text-center"><u><b>Our Product Collections</b></u></h4>
+    {% endif %}
+    <br>
+</div>
+<div class="container">
+  <div class="row mx_auto">
+    {% for product in product.object_list %}
+    <div  class=" my_bottom_margin col-12 col-md-12 col-sm-4 col-lg-4" >
+        <div class="card shadow" style="width:20rem">
+            <div class="card-body">
+                <a href="{{product.get_url}}" ><img class="card-img-top"  src="{{product.image.url}}" alt="{{product.name}}" width="200" height="300"></a>
+                <h4 class="text-center"><b>{{product.name}}</b></h4>
+                <p class="text-center">Rs.{{product.price}}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+    <div class="row mx_auto">
+        {% if product.paginator.num_pages > 1 %}
+        <div class="text-center">
+            {% for pg in product.paginator.page_range %}
+            <a href="?page={{pg}}" class="btn btn-dark btn-sm {% if product.number == pg %} active {% endif %}">{{pg}}</a>
+            {% endfor %}<br>
+        </div><br>
+        {% endif %}
+    </div><br>
+<br>
+<br>
+{% endblock %}
+
+
+
+
+

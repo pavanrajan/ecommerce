@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block metadescription %}
+
+    {{ product.description |truncatewords:50}}
+{% endblock %}
+
+{% block tittle %}
+    {{ product.name }}
+{% endblock %}
+{% block body %}
+<div>
+    <div class="row my_row">
+        <div class="mx_auto">
+            <p><a href=""></a><a href="{{ product.category.get_url}} ">{{ product.category }}</a>.     -{{product.name}}</p>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-md-12">
+            <div class="min-width=20rem">
+                <img src="{{product.image.url}}" alt="{{product.name}}">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col 12 col-sm-12 col-lg-6 col-md-12" >
+
+        <h3 class="my_prod_name">{{ product.name}}</h3>
+        <p class="text-justify">{{product.price}}</p>
+        <P class="text-justify">{{product.description}}</P>
+        {% if product.stock <= 0 %}
+            <h4><b>Item Out Of Stock !!! </b></h4>
+        {% else %}
+            <p> <a class="btn btn-success button"  href="{% url 'cart_app:cart' product.id %}" ><b>Add To Cart</b></a></p><br>
+        {% endif %}
+
+</div>
+<br>
+<br>
+{% endblock %}

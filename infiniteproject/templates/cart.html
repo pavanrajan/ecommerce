@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block metadescription %}
+{% endblock %}
+
+{% block tittle %}
+{% endblock %}
+
+{% block body %}
+{% if not cart_item %}
+<div>
+    <div>
+        <h3 class="text-center">Your Cart Is Empty!!!!</h3><br>
+        <h4 class="text-center">Click<a href="{% url 'infiniteapp:AllProductCat' %}">Here</a>To continue shopping....!!</h4>
+    </div>
+</div>
+{% else %}
+<div>
+    <div>
+        <h3 class="text-center">Your Cart Items...</h3>
+    </div>
+</div>
+<div class="row mx-auto">
+    <div class="col-12 col-md-12 col-sm-12 col-lg-6">
+        <table class="cart_table">
+            <thead class="cart_table_head">
+            <tr>
+                <th>
+                    Your Items...
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for cart_items in cart_item %}
+            <tr>
+                <td>
+                    <a href=" cart_items.product.get_absolute.url"><img src="{{cart_items.product.image.url}}" width="150" height="200" alt="product image"></a>
+                </td>
+                <td>
+                    <b>{{ cart_items.product.name}}</b>
+                    <br>
+                    Rs.{{cart_items.product.price}}.
+                    <br>
+                    Qty {{cart_items.quantity}} X Rs. {{cart_items.product.price}}.
+                </td>
+                <td>
+                    Tot = Rs.{{ cart_items.subtotal }}
+                </td>
+                {% if cart_items.quantity < cart_items.product.stock %}
+                <td>
+                    <a href=" {% url 'cart_app:cart' cart_items.product.id %}"><i class="material-icons">add</i></a>
+                    &nbsp;<a href="{% url 'cart_app:item_remove' cart_items.product.id %}"><i class="material-icons">remove</i></a>
+                    &nbsp;<a href="{% url 'cart_app:cart_delete' cart_items.product.id %}"><i class="material-icons">delete</i></a>
+                </td>
+                {% else %}
+                <td>
+                    &nbsp;<a href="{% url 'cart_app:item_remove' cart_items.product.id%}"><i class="material-icons">remove</i></a>
+                    &nbsp;<a href="{% url 'cart_app:cart_delete' cart_items.product.id %}"><i class="material-icons">delete</i></a>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-12 col-md-12 col-sm-12 col-lg-6 text-center">
+        <table class="cart_table">
+            <thead class="cart_table_head">
+            <tr>
+                <th class="text-left">
+                    CheckOuT
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    Please review your items before proceeding for the Payment !!!
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    Total Amount = <b>{{ total }}</b>
+                </td>
+            </tr>
+
+            <tr>
+             <th>
+
+                 <br>
+                  <a  href="{% url 'infiniteapp:AllProductCat' %}" class="btn btn-dark my_button">Continue Shopping</a>
+             </th>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <div class="mx-auto">
+
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+    {% block metadescription %}
+    U r at the Right place
+    {% endblock %}
+{% block tittle %}
+ search!!
+{% endblock %}
+
+{% block body %}
+<div>
+    <p class="text-center my_search">You are searched for.."{{query}}" </p>
+</div>
+<div class="container">
+  <div class="row mx_auto">
+    {% for product in result %}
+    <div  class=" my_bottom_margin col-12 col-md-12 col-sm-4 col-lg-4" >
+        <div class="card shadow" style="width:20rem">
+            <div class="card-body">
+                <a href="{{product.get_url}}" ><img class="card-img-top"  src="{{product.image.url}}" alt="{{product.name}}"></a>
+                <h4 class="text-center"><b>{{product.name}}</b></h4>
+                <p class="text-center">Rs.{{product.price}}</p>
+             <div>
+                 {% empty %}
+                 <div class="row=mx_auto">
+                     <p class="text-center">oops!!! item not found</p>
+                 </div>
+             </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-black bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"></a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{%  url 'infiniteapp:AllProductCat' %}">Home</a>
+        </li>
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="{%  url 'infiniteapp:AllProductCat' %}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+             Product Category
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for i in links %}
+            <li><a class="dropdown-item" href="{{i.get_url}}">{{i.name}}</a></li>
+              {% endfor %}
+              <li><hr class="dropdown-divider"></li>
+          </ul>
+        </li>
+        {% if item_count > 0 %}
+          <li class="nav-item">
+          <a class= " nav-link" href="{% url 'cart_app:cart_detail' %}" ><i class="material-icons">&#xe8cc;</i>({{ item_count }})</a>
+        </li>
+        {% endif %}
+      </ul>
+      <form class="d-flex" action="{% url 'search_app:search' %}" method="get">
+        <input class="form-control me-2" type="search" placeholder="Search" name="q" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit"><i class="material-icons">search</i></i></button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<br>
